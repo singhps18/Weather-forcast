@@ -1,71 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather Sample</title>
-      <link rel="stylesheet" href="weather.css">
-          <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Sample</title>
+    <link rel="stylesheet" href="weather.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
-<body >
+
+<body>
 
 
-        <div id="pagewrap">
-            <nav class="header-bar">
-                <!-- <div class="p-4">
-                    <div class="menu"></div>
-                    <div class="menu"></div>
-                    <div class="menu"></div>
-                </div> -->
-                <div>
-                        <a href="https://aniwatchtv.to/inuyasha-739?ref=search">
-                        <img src="8214c6a2-d127-4b12-9897-008a29d45ff7.png" alt="weater" width="70" height="60">
-                    </a>
-                </div>
-                <div>
-                  <form id="weatherForm">
-                    <input type="text" placeholder="Enter city..." id="weatherInput">
-                    <button type="submit">Search</button>
-                </form>
-                </div>
-            </nav>
+    <div id="pagewrap">
+        <nav class="header-bar">
+            <div>
+                <a href="https://aniwatchtv.to/inuyasha-739?ref=search">
+                    <img src="8214c6a2-d127-4b12-9897-008a29d45ff7.png" alt="weater" width="70" height="60">
+                </a>
+            </div>
+            <div>
+                <!-- <div class="text-m sm:text-sm opacity-80"></div> -->
+            </div>
+        </nav>
 
-            <div class="home">
-                <a href="#home" >Home</a>/<a href="#weather" class="ten">Weather Mumbai</a>
+        <div class="home">
+            <a href="#home">Home</a>/<a href="#weather" class="ten city"></a>
+        </div>
+
+        <section id="controls" class="grid gap-3 sm:grid-cols-[1fr_auto_auto] p-2 text-slate-100">
+            <div class="flex rounded-2xl ring-1  ring-white/10 overflow-hidden border border-[#ffbe00] bg-[rgb(53,158,158)] text-white-500">
+                <input id="cityInput" type="text" placeholder="Search by city (e.g., Mumbai)"
+                    class="w-full bg-transparent px-4 py-3 outline-none placeholder:text-slate-400 " />
+                <button id="searchBtn" class="px-4 py-3 hover:bg-white/10 transition">Search</button>
+            </div>
+            <button id="locBtn"
+                class="rounded-2xl ring-1 ring-white/10 bg-[rgb(53,158,158)] px-4 py-3 hover:bg-[rgb(23,158,158)] transition border border-[#ffbe00] ">
+                Use Current Location
+            </button>
+
+            <div class="relative">
+                <button id="recentToggle"
+                    class="w-full rounded-2xl border border-[#ffbe00] bg-[rgb(53,158,158)]  hover:bg-[rgb(23,158,158)] px-4 py-3  transition flex items-center justify-between text-white-100">
+                    <span>Recent Cities</span>
+                    <svg id="recentChevron" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform"
+                        viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <ul id="recentList"
+                    class="hidden absolute z-20 mt-2 w-full max-h-64 overflow-auto rounded-xl ring-1 ring-white/10 bg-slate-800/90 backdrop-blur p-2 space-y-1 text-sm">
+                    <!-- dynamic -->
+                </ul>
+            </div>
+        </section>
+
+
+
+
+        <div class="cards">
+            <div class="card1">
+                <div class="country"></div>
+                <span class="todayDate">
+                    <span class="sunrise"></span>
+                </span>
+            </div>
+            <div class="card2">
+                <h1 class="mainWeather">
+
+                </h1>
+                <span><img src="ic_quicklink_wind.svg" alt="ga" width="50" height="50"></span>
+            </div>
+            <span class="cover">now</span>
+
+            <div class="horizontal-group">
+                <div class="tem"> </div>
+                <div class="Aqi humidity"></div>
             </div>
 
 
-            <div class="flex justify-around p-4">
-                <div>
-                    <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-teal-600 dark:bg-teal-800 dark:border-bg-teal-700 dark:hover:bg-bg-teal-700">
-                       <ul id="cityList"></ul>
-                    </a>
-                </div>
-                 <div>
-                    <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-teal-600 dark:bg-teal-800 dark:border-bg-teal-700 dark:hover:bg-bg-teal-700">
-                    <p class=" dark:text-white ">
-                        hello
-                    </p>
-                    </a>
-                </div><div>
-                    <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-teal-600 dark:bg-teal-800 dark:border-bg-teal-700 dark:hover:bg-bg-teal-700">
-                        <p class=" dark:text-white ">
-                            hello
-                        </p>
-                    </a>
+            <div class="flex justify-end ">
+                <div class="smallcard">
+                    <div>
+                        <div class="text-top description"> </div>
+                        <div class="text-down windspeed"> </div>
+                    </div>
+
+                    <div class="circle">
+                    </div>
                 </div>
             </div>
 
-            <div class="cards">
-           
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 p-5">
+            <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
+                style="background-color: rgb(53, 158, 158);">
+                <div class="text-sm opacity-80">Fri, Aug 29</div>
+                <div class="flex items-center gap-2">
+                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
+                    <div class="font-semibold tem"></div>
+                </div>
+                <div class="text-xs opacity-80">Rain (moderate rain)</div>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Hum</div>
+                        <div class="font-semibold humidity"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Wind</div>
+                        <div class="font-semibold wind"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Min/Max</div>
+                        <div class="font-semibold">25° / 25°</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded-2xl p-4 grid gap-2  border border-[#ffbe00]"
+                style="background-color: rgb(53, 158, 158);">
+                <div class="text-sm opacity-80">Fri, Aug 29</div>
+                <div class="flex items-center gap-2">
+                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
+                    <div class="font-semibold tem"></div>
+                </div>
+                <div class="text-xs opacity-80">Rain (moderate rain)</div>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Hum</div>
+                        <div class="font-semibold humidity"  ></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Wind</div>
+                        <div class="font-semibold wind"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Min/Max</div>
+                        <div class="font-semibold">25° / 25°</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
+                style="background-color: rgb(53, 158, 158);">
+                <div class="text-sm opacity-80">Fri, Aug 29</div>
+                <div class="flex items-center gap-2">
+                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
+                    <div class="font-semibold tem"></div>
+                </div>
+                <div class="text-xs opacity-80">Rain (moderate rain)</div>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Hum</div>
+                        <div class="font-semibold humidity"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Wind</div>
+                        <div class="font-semibold wind"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Min/Max</div>
+                        <div class="font-semibold">25° / 25°</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
+                style="background-color: rgb(53, 158, 158); ">
+                <div class="text-sm opacity-80">Fri, Aug 29</div>
+                <div class="flex items-center gap-2">
+                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
+                    <div class="font-semibold tem"></div>
+                </div>
+                <div class="text-xs opacity-80">Rain (moderate rain)</div>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Hum</div>
+                        <div class="font-semibold humidity"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Wind</div>
+                        <div class="font-semibold wind"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Min/Max</div>
+                        <div class="font-semibold">25° / 25°</div>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
+                style="background-color: rgb(53, 158, 158);">
+                <div class="text-sm opacity-80">Fri, Aug 29</div>
+                <div class="flex items-center gap-2">
+                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
+                    <div class="font-semibold tem"></div>
+                </div>
+                <div class="text-xs opacity-80">Rain (moderate rain)</div>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Hum</div>
+                        <div class="font-semibold humidity"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Wind</div>
+                        <div class="font-semibold wind"></div>
+                    </div>
+                    <div class="rounded-lg bg-white/5 p-2">
+                        <div class="opacity-70">Min/Max</div>
+                        <div class="font-semibold">25° / 25°</div>
+                    </div>
+                </div>
             </div>
         </div>
 
-<script src="weather.js">
 
-</script>
+
+    </div>
+
+    <script src="weather.js">
+
+    </script>
 
 
 </body>
+
 </html>
