@@ -19,8 +19,8 @@ function setBackgroundByCondition(main) {
   else if (key.includes("mist") || key.includes("fog") || key.includes("haze")) bg = BGs.mist;
 
   document.documentElement.style.setProperty("--bg-url", `url('data:image/svg+xml;utf8,')`);
-  document.body.style.setProperty("--bg-url", `url('')`); // reset to ensure transition
-  document.body.style.setProperty("--bg-url", bg.replace("url('", "url('")); // set
+  document.body.style.setProperty("--bg-url", `url('')`);
+  document.body.style.setProperty("--bg-url", bg.replace("url('", "url('")); 
 }
 
 
@@ -30,27 +30,97 @@ async function checkWeather() {
   try {
     const apiResponse = await fetch(apiUrl + `&appid=${apiKeys}`);
     const data = await apiResponse.json();
-    // Update DOM
-    document.querySelector(".city").innerHTML = "Weather" +" " +data.name;
-    document.querySelector(".tem").innerHTML = `🌡️ ${data.main.temp} °C`;
-    document.querySelector(".humidity").innerHTML = `💧 ${data.main.humidity}%`;
-   document.querySelector(".mainWeather").innerHTML =  data.weather[0].main;;
-    document.querySelector(".todayDate").innerHTML = new Date(data.dt * 1000).toLocaleDateString(); 
-    document.querySelector(".country").innerHTML =  data.sys.country;
-    document.querySelector(".sunrise").innerHTML =  new Date(data.sys.sunrise * 1000).toLocaleTimeString();
-    document.querySelector(".sunset").innerHTML = new Date(data.sys.sunset * 1000).toLocaleTimeString();
-      document.querySelector(".description").innerHTML= data.weather[0].description;
-   document.querySelector(".rain").innerHTML = data.rain;
- document.querySelector(".windspeed").innerHTML = `💨 ${data.wind.speed} m/s`;
-document.querySelector(".winddirection").innerHTML = `🧭 ${data.wind.deg}°`;
+    console.log("API Data:", data);
+
+    const update = (selector, value) => {
+      const el = document.querySelector(selector);
+      if (el) el.innerHTML = value;
+    };
+
+    update(".city", "Weather " + data.name);
+    update(".tem", `🌡️ ${data.main.temp} °C`);
+    update(".humidity", `💧 ${data.main.humidity}%`);
+    update(".mainWeather", data.weather[0].main);
+    update(".todayDate", new Date(data.dt * 1000).toLocaleDateString());
+    update(".country", data.sys.country);
+    update(".description", data.weather[0].description);
+    update(".rain", data.rain ? data.rain["1h"] + " mm" : "No rain");
+    update(".windspeed", `💨 ${data.wind.speed} m/s`);
+    update(".winddirection", ` ${data.wind.deg}°`);
+    update(".tempRange", ` ${data.main.temp_min.toFixed(1)}°C / ${data.main.temp_max.toFixed(1)}°C`
+);
 
 
-
-  setBackgroundByCondition(data.weather[0].main|| "");
+    setBackgroundByCondition(data.weather[0].main || "");
   } catch (error) {
     console.error("Error fetching weather data:", error);
   }
 }
+
+async function getForecast(city) {
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=61b9c083533ed5703b184ec1f5fcc5c9&units=metric`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const dailyForecast = data.list.filter(f => f.dt_txt.includes("12:00:00"));
+
+    displayForecast(dailyForecast);
+  } catch (err) {
+    console.error("Forecast error:", err);
+  }
+}
+
+function displayForecast(list) {
+  const forecastContainer = document.querySelector("#forecast");
+  forecastContainer.innerHTML = ""; 
+
+  list.forEach(day => {
+    const date = new Date(day.dt * 1000);
+    const options = { weekday: "short", month: "short", day: "numeric" };
+    const dateStr = date.toLocaleDateString(undefined, options);
+
+    const icon = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
+    const desc = day.weather[0].description;
+    const temp = day.main.temp.toFixed(1);
+    const humidity = day.main.humidity;
+    const wind = day.wind.speed.toFixed(1);
+    const min = day.main.temp_min.toFixed(1);
+    const max = day.main.temp_max.toFixed(1);
+
+    const card = `
+      <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
+           style="background-color: rgba(74, 113, 113, 1);">
+         <div class="text-sm opacity-80">${dateStr}</div>
+         <div class="flex items-center gap-2">
+             <img src="${icon}" alt="cond" class="w-10 h-10">
+             <div class="font-semibold">${temp}°C</div>
+         </div>
+         <div class="text-xs opacity-80">${day.weather[0].main} (${desc})</div>
+         <div class="grid grid-cols-3 gap-2 text-xs">
+             <div class="rounded-lg bg-white/5 p-2">
+                 <div class="opacity-70">Hum</div>
+                 <div class="font-semibold">${humidity}%</div>
+             </div>
+             <div class="rounded-lg bg-white/5 p-2">
+                 <div class="opacity-70">Wind</div>
+                 <div class="font-semibold">${wind} m/s</div>
+             </div>
+             <div class="rounded-lg bg-white/5 p-2">
+                 <div class="opacity-70">Min/Max</div>
+                 <div class="font-semibold">${min}°C / ${max}°C</div>
+             </div>
+         </div>
+      </div>
+    `;
+
+    forecastContainer.innerHTML += card;
+  });
+}
+
+// call function
+getForecast("kuwait");
+
 
 checkWeather();
 

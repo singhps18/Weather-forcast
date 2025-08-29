@@ -61,18 +61,21 @@
 
 
 
-        <div class="cards">
+        <div class="card">
             <div class="card1">
                 <div class="country"></div>
                 <span class="todayDate">
-                    <span class="sunrise"></span>
+                   <div class="sunrise"></div>
                 </span>
             </div>
             <div class="card2">
-                <h1 class="mainWeather">
+                <h1 class="description">
 
                 </h1>
-                <span><img src="ic_quicklink_wind.svg" alt="ga" width="50" height="50"></span>
+           
+                <span><img src="ic_quicklink_wind.svg" alt="ga" width="50" height="50">
+                      <div class="winddirection"></div></span>
+               
             </div>
             <span class="cover">now</span>
 
@@ -85,8 +88,8 @@
             <div class="flex justify-end ">
                 <div class="smallcard">
                     <div>
-                        <div class="text-top description"> </div>
-                        <div class="text-down windspeed"> </div>
+                        <div class="text-top mainWeather"> </div>
+                        <div class="text-down rain"> </div>
                     </div>
 
                     <div class="circle">
@@ -96,126 +99,10 @@
 
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 p-5">
-            <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
-                style="background-color: rgb(53, 158, 158);">
-                <div class="text-sm opacity-80">Fri, Aug 29</div>
-                <div class="flex items-center gap-2">
-                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
-                    <div class="font-semibold tem"></div>
-                </div>
-                <div class="text-xs opacity-80">Rain (moderate rain)</div>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Hum</div>
-                        <div class="font-semibold humidity"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Wind</div>
-                        <div class="font-semibold wind"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Min/Max</div>
-                        <div class="font-semibold">25° / 25°</div>
-                    </div>
-                </div>
-            </div>
+       <div id="forecast" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 p-2">
 
-            <div class="rounded-2xl p-4 grid gap-2  border border-[#ffbe00]"
-                style="background-color: rgb(53, 158, 158);">
-                <div class="text-sm opacity-80">Fri, Aug 29</div>
-                <div class="flex items-center gap-2">
-                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
-                    <div class="font-semibold tem"></div>
-                </div>
-                <div class="text-xs opacity-80">Rain (moderate rain)</div>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Hum</div>
-                        <div class="font-semibold humidity"  ></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Wind</div>
-                        <div class="font-semibold wind"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Min/Max</div>
-                        <div class="font-semibold">25° / 25°</div>
-                    </div>
-                </div>
-            </div>
+       </div>
 
-            <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
-                style="background-color: rgb(53, 158, 158);">
-                <div class="text-sm opacity-80">Fri, Aug 29</div>
-                <div class="flex items-center gap-2">
-                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
-                    <div class="font-semibold tem"></div>
-                </div>
-                <div class="text-xs opacity-80">Rain (moderate rain)</div>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Hum</div>
-                        <div class="font-semibold humidity"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Wind</div>
-                        <div class="font-semibold wind"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Min/Max</div>
-                        <div class="font-semibold">25° / 25°</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
-                style="background-color: rgb(53, 158, 158); ">
-                <div class="text-sm opacity-80">Fri, Aug 29</div>
-                <div class="flex items-center gap-2">
-                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
-                    <div class="font-semibold tem"></div>
-                </div>
-                <div class="text-xs opacity-80">Rain (moderate rain)</div>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Hum</div>
-                        <div class="font-semibold humidity"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Wind</div>
-                        <div class="font-semibold wind"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Min/Max</div>
-                        <div class="font-semibold">25° / 25°</div>
-                    </div>
-                </div>
-            </div>
-            <div class="rounded-2xl p-4 grid gap-2 border-[#ffbe00] border"
-                style="background-color: rgb(53, 158, 158);">
-                <div class="text-sm opacity-80">Fri, Aug 29</div>
-                <div class="flex items-center gap-2">
-                    <img src="https://openweathermap.org/img/wn/10n@2x.png" alt="cond" class="w-10 h-10">
-                    <div class="font-semibold tem"></div>
-                </div>
-                <div class="text-xs opacity-80">Rain (moderate rain)</div>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Hum</div>
-                        <div class="font-semibold humidity"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Wind</div>
-                        <div class="font-semibold wind"></div>
-                    </div>
-                    <div class="rounded-lg bg-white/5 p-2">
-                        <div class="opacity-70">Min/Max</div>
-                        <div class="font-semibold">25° / 25°</div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
 

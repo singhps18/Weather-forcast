@@ -60,13 +60,17 @@ width: 35px;
 .ten{
       color: #333 !important;
 }
-.cards{
+.card{
     border-radius: 4px;
     padding: 10px;
     min-height: 325px;
     margin: 0 auto;
     border: 1px solid #ffbe00;
-     background-color: rgb(53, 158, 158);
+      background-image: var(--bg-url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 0.6s ease, background-color 0.3s ease;
 
 }
 .card1{
