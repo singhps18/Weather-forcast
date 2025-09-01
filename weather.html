@@ -1,118 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Sample</title>
-    <link rel="stylesheet" href="weather.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Forecast</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="weather.css">
 </head>
-
-<body>
-
-
-    <div id="pagewrap">
-        <nav class="header-bar">
-            <div>
-                <a href="https://aniwatchtv.to/inuyasha-739?ref=search">
-                    <img src="8214c6a2-d127-4b12-9897-008a29d45ff7.png" alt="weater" width="70" height="60">
-                </a>
-            </div>
-            <div>
-                <!-- <div class="text-m sm:text-sm opacity-80"></div> -->
-            </div>
-        </nav>
-
-        <div class="home">
-            <a href="#home">Home</a>/<a href="#weather" class="ten city"></a>
-        </div>
-
-        <section id="controls" class="grid gap-3 sm:grid-cols-[1fr_auto_auto] p-2 text-slate-100">
-            <div class="flex rounded-2xl ring-1  ring-white/10 overflow-hidden border border-[#ffbe00] bg-[rgb(53,158,158)] text-white-500">
-                <input id="cityInput" type="text" placeholder="Search by city (e.g., Mumbai)"
-                    class="w-full bg-transparent px-4 py-3 outline-none placeholder:text-slate-400 " />
-                <button id="searchBtn" class="px-4 py-3 hover:bg-white/10 transition">Search</button>
-            </div>
-            <button id="locBtn"
-                class="rounded-2xl ring-1 ring-white/10 bg-[rgb(53,158,158)] px-4 py-3 hover:bg-[rgb(23,158,158)] transition border border-[#ffbe00] ">
-                Use Current Location
-            </button>
-
-            <div class="relative">
-                <button id="recentToggle"
-                    class="w-full rounded-2xl border border-[#ffbe00] bg-[rgb(53,158,158)]  hover:bg-[rgb(23,158,158)] px-4 py-3  transition flex items-center justify-between text-white-100">
-                    <span>Recent Cities</span>
-                    <svg id="recentChevron" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform"
-                        viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
-                <ul id="recentList"
-                    class="hidden absolute z-20 mt-2 w-full max-h-64 overflow-auto rounded-xl ring-1 ring-white/10 bg-slate-800/90 backdrop-blur p-2 space-y-1 text-sm">
-                    <!-- dynamic -->
-                </ul>
-            </div>
-        </section>
-
-
-
-
-        <div class="card">
-            <div class="card1">
-                <div class="country"></div>
-                <span class="todayDate">
-                   <div class="sunrise"></div>
-                </span>
-            </div>
-            <div class="card2">
-                <h1 class="description">
-
-                </h1>
-           
-                <span><img src="ic_quicklink_wind.svg" alt="ga" width="50" height="50">
-                      <div class="winddirection"></div></span>
-               
-            </div>
-            <span class="cover">now</span>
-
-            <div class="horizontal-group">
-                <div class="tem"> </div>
-                <div class="Aqi humidity"></div>
-            </div>
-
-
-            <div class="flex justify-end ">
-                <div class="smallcard">
-                    <div>
-                        <div class="text-top mainWeather"> </div>
-                        <div class="text-down rain"> </div>
-                    </div>
-
-                    <div class="circle">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-       <div id="forecast" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 p-2">
-
-       </div>
-
-
-
-
+<body class="dynamic-bg min-h-screen bg-slate-900 text-slate-100">
+  <header class="backdrop-blur-sm/40 bg-slate-900/40 sticky top-0 z-10 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-xl sm:text-2xl font-semibold tracking-tight">Weather Forecast</h1>
     </div>
+  </header>
 
-    <script src="weather.js">
+  <main class="max-w-6xl mx-auto px-4 py-6 grid gap-6">
+    <section id="controls" class="grid gap-3 sm:grid-cols-[1fr_auto_auto]">
+      <div class="flex rounded-2xl ring-1 ring-white/10 bg-white/5 overflow-hidden">
+        <input id="cityInput" type="text" placeholder="Search by city (e.g., Mumbai)"
+          class="w-full bg-transparent px-4 py-3 outline-none placeholder:text-slate-400" />
+        <button id="searchBtn" class="px-4 py-3 hover:bg-white/10 transition">Search</button>
+      </div>
+      <button id="locBtn" class="rounded-2xl ring-1 ring-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition">
+        Use Current Location
+      </button>
 
-    </script>
+      <div class="relative">
+        <button id="recentToggle"
+          class="w-full rounded-2xl ring-1 ring-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition flex items-center justify-between">
+          <span>Recent Cities</span>
+          <svg id="recentChevron" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z" clip-rule="evenodd" /></svg>
+        </button>
+        <ul id="recentList"
+          class="hidden absolute z-20 mt-2 w-full max-h-64 overflow-auto rounded-xl ring-1 ring-white/10 bg-slate-800/90 backdrop-blur p-2 space-y-1 text-sm">
+
+        </ul>
+      </div>
+    </section>
 
 
+    <div id="alertBox" class="hidden rounded-xl border border-yellow-400/40 bg-yellow-400/10 text-yellow-200 px-4 py-3"></div>
+    <div id="errorBox" class="hidden rounded-xl border border-rose-400/40 bg-rose-400/10 text-rose-200 px-4 py-3"></div>
+
+
+    <section id="today" class="grid gap-4 sm:grid-cols-2">
+      <article class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5 flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 id="cityTitle" class="text-lg font-semibold">—</h2>
+            <p id="dateTitle" class="text-sm opacity-70">—</p>
+          </div>
+          <img id="todayIcon" alt="icon" class="w-16 h-16" />
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="text-5xl font-semibold" id="todayTemp">—</div>
+          <div class="flex items-center gap-2">
+            <label for="unitToggle" class="text-sm opacity-70">°C / °F</label>
+            <input id="unitToggle" type="checkbox" class="h-5 w-10 accent-sky-400">
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-3 text-sm">
+          <div class="rounded-xl bg-white/5 p-3">
+            <p class="opacity-70">Feels like</p>
+            <p id="todayFeels" class="font-semibold">—</p>
+          </div>
+          <div class="rounded-xl bg-white/5 p-3">
+            <p class="opacity-70">Humidity</p>
+            <p id="todayHumidity" class="font-semibold">—</p>
+          </div>
+          <div class="rounded-xl bg-white/5 p-3">
+            <p class="opacity-70">Wind</p>
+            <p id="todayWind" class="font-semibold">—</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5 grid gap-3">
+        <h3 class="font-semibold">Details</h3>
+        <ul class="grid grid-cols-2 gap-3 text-sm">
+          <li class="rounded-xl bg-white/5 p-3"><span class="opacity-70">Condition</span><br><span id="todayCond" class="font-semibold">—</span></li>
+          <li class="rounded-xl bg-white/5 p-3"><span class="opacity-70">Pressure</span><br><span id="todayPress" class="font-semibold">—</span></li>
+          <li class="rounded-xl bg-white/5 p-3"><span class="opacity-70">Visibility</span><br><span id="todayVis" class="font-semibold">—</span></li>
+          <li class="rounded-xl bg-white/5 p-3"><span class="opacity-70">Clouds</span><br><span id="todayCloud" class="font-semibold">—</span></li>
+        </ul>
+      </article>
+    </section>
+    <section id="forecast" class="grid gap-4">
+      <h3 class="text-lg font-semibold">5‑Day Forecast</h3>
+      <div id="forecastGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="./script.js"></script>
 </body>
-
 </html>
